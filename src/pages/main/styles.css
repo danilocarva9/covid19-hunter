@@ -1,0 +1,13 @@
+.container_margin{
+    margin-top: 20px;
+}
+.countries-list{
+    font-size: 0.9rem;
+}
+.countries-list li {
+    margin-bottom: 10px;
+}
+.c_country{
+    width: 100%;
+    text-align: left;
+}
