@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './components/header';
-import Routes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './styles.css';
@@ -11,7 +10,6 @@ const App = () => (
   <div className="App">
       <Header/>
       <Main/>
-      {/* <Routes/> */}
   </div>
 );
 

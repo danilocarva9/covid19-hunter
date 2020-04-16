@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Container, Col, Row, Card } from 'react-bootstrap';
-import { Route, NavLink, Link, HashRouter} from "react-router-dom";
-
+import { Route, Link, HashRouter} from "react-router-dom";
 import Country from '../../pages/country';
 import './styles.css';
 
@@ -12,7 +11,7 @@ export default class Main extends Component {
         countries: [],
     }
     componentDidMount(){
-        this.loadCountries();
+      //  this.loadCountries();
     }
 
     loadCountries = async () => {
@@ -31,7 +30,7 @@ export default class Main extends Component {
         <Row>
         <Col xs={10}>
             <div className="content">
-            <Country />
+             <Route path="/country/:id" exact strict component={Country} />
             </div>
         </Col>
 
@@ -40,7 +39,7 @@ export default class Main extends Component {
             <Card>
             <Card.Header>Countries ({countries.length})</Card.Header>
             <Card.Body>
-            {countries.map(country => (
+            {/* {countries.map(country => (
                 <div key={country.Slug}>
                  <Card.Title>
                  <Link to={`/country/${country.Slug}`}>{country.Country}</Link>
@@ -51,7 +50,29 @@ export default class Main extends Component {
                  </Card.Text>
                 <hr/>
                  </div>
-             ))}
+             ))} */}
+
+                <div key="Brazil">
+                <Card.Title>
+                <Link to={`/country/Brazil`}>Brazil</Link>
+                </Card.Title>
+                <Card.Text>
+                Confirmed Cases: 123 <br/>
+                Deaths: 123
+                </Card.Text>
+                <hr/>
+                </div>
+
+                <div key="Argentina">
+                <Card.Title>
+                <Link to={`/country/Argentina`}>Argentina</Link>
+                </Card.Title>
+                <Card.Text>
+                Confirmed Cases: 123 <br/>
+                Deaths: 123
+                </Card.Text>
+                <hr/>
+                </div>
              
             </Card.Body>
            

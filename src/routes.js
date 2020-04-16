@@ -6,8 +6,8 @@ import Country from './pages/country';
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/country/:id" component={Country} />
+           {/* <Route exact path="/" component={Main} /> 
+             <Route path="/country/:id" component={Country} />*/}
         </Switch>
     </BrowserRouter>
 );
