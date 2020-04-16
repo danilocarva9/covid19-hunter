@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
-import { Container, Col, Row, Button,Card } from 'react-bootstrap';
+import { Container, Col, Row, Card } from 'react-bootstrap';
+import { Route, NavLink, Link, HashRouter} from "react-router-dom";
+
+import Country from '../../pages/country';
 import './styles.css';
 
 export default class Main extends Component {
@@ -22,67 +25,43 @@ export default class Main extends Component {
         const { countries } = this.state;
         
         return (
+        <HashRouter>
         <div>
-       
         <Container fluid className="container_margin">
         <Row>
         <Col xs={10}>
-       
-       
-            <Card>
-            <Card.Header>Brazil</Card.Header>
-            <Card.Body>
-            <Card.Title>Dados da Covid-19</Card.Title>
-            <Card.Text>
-
-            <Container>
-            <Row>
-            <Col>Total de Casos <h3>23443</h3></Col>
-            <Col>Total de Mortes <h3>23443</h3></Col>
-            <Col>Novos Casos <h3>23443</h3><small>2020-04-15T13:14:29Z</small></Col>
-            </Row>
-            </Container>
-
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-            </Card>
-
+            <div className="content">
+            <Country />
+            </div>
         </Col>
-
 
         <Col xs={2}>
             <div className="countries-list">
-           
             <Card>
             <Card.Header>Countries ({countries.length})</Card.Header>
             <Card.Body>
-          
             {countries.map(country => (
-                <div>
-                 <Card.Title><a href="#">{country.Country}</a></Card.Title>
+                <div key={country.Slug}>
+                 <Card.Title>
+                 <Link to={`/country/${country.Slug}`}>{country.Country}</Link>
+                 </Card.Title>
                  <Card.Text>
-                <p>
-                Confirmed Cases: {country.TotalConfirmed} <br/>
-                Deaths: {country.TotalDeaths}
-                </p>
+                  Confirmed Cases: {country.TotalConfirmed} <br/>
+                  Deaths: {country.TotalDeaths}
                  </Card.Text>
                 <hr/>
                  </div>
              ))}
-
-
+             
             </Card.Body>
+           
             </Card>
-
             </div>
         </Col>
         </Row>
-
-
         </Container>
-
         </div>
+        </HashRouter>
         )
     }
 }
