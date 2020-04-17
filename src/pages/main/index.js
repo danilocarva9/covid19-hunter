@@ -10,16 +10,37 @@ export default class Main extends Component {
 
     state = {
         countries: [],
+        countryFilter: '',
     }
     async componentDidMount(){
       this.loadCountries();
     }
 
-    loadCountries = async () => {
+    loadCountries = async (filtered_value = null) => {
+
+        console.log(filtered_value);
         const response = await api.get('/summary');
+     
+
         this.setState({ countries: response.data.Countries });
     }
 
+
+    handleChange = (e) => {
+        
+        if(e.target.value){
+            this.loadCountries(e.target.value);
+        }
+       
+        // console.log(e.target.value);
+
+        // const filtered = _.filter(jedi, (item) => {
+        //     return item.name.indexOf(searchfield) > -1
+        //  })
+
+        // console.log(filtered);        
+    }
+    
     render(){
 
         const { countries } = this.state;
@@ -36,7 +57,16 @@ export default class Main extends Component {
             </div>
         </Col>
 
+
         <Col xs={2}>
+                
+                <div>
+                <label htmlFor="filter">Search Country: </label>
+                <input type="text" id="filter" 
+                value={this.state.countryFilter} 
+                onChange={this.handleChange}/>
+                </div>
+            
             <div className="countries-list">
             <Card>
             <Card.Header>Countries ({countries.length})</Card.Header>
