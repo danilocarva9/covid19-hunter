@@ -3,6 +3,7 @@ import api from '../../services/api';
 import { Container, Col, Row, Card } from 'react-bootstrap';
 import { Route, Link, HashRouter} from "react-router-dom";
 import Country from '../../pages/country';
+import Global from '../../pages/global';
 import './styles.css';
 
 export default class Main extends Component {
@@ -10,8 +11,8 @@ export default class Main extends Component {
     state = {
         countries: [],
     }
-    componentDidMount(){
-      //  this.loadCountries();
+    async componentDidMount(){
+      this.loadCountries();
     }
 
     loadCountries = async () => {
@@ -30,7 +31,8 @@ export default class Main extends Component {
         <Row>
         <Col xs={10}>
             <div className="content">
-             <Route path="/country/:id" exact strict component={Country} />
+             <Route exact path="/" component={Global} /> 
+             <Route path="/country/:id" strict component={Country} />
             </div>
         </Col>
 
@@ -38,21 +40,25 @@ export default class Main extends Component {
             <div className="countries-list">
             <Card>
             <Card.Header>Countries ({countries.length})</Card.Header>
-            <Card.Body>
-            {/* {countries.map(country => (
-                <div key={country.Slug}>
-                 <Card.Title>
-                 <Link to={`/country/${country.Slug}`}>{country.Country}</Link>
-                 </Card.Title>
-                 <Card.Text>
-                  Confirmed Cases: {country.TotalConfirmed} <br/>
-                  Deaths: {country.TotalDeaths}
-                 </Card.Text>
-                <hr/>
-                 </div>
-             ))} */}
+            <Card.Body className="bodyScroll">
+            {countries.map(country => (
 
-                <div key="Brazil">
+                country.TotalConfirmed > 0 ?
+                    <div key={country.Slug}>
+                    <Card.Title>
+                    <Link to={`/country/${country.Slug}`}>{country.Country}</Link>
+                    </Card.Title>
+                    <Card.Text>
+                    Confirmed Cases: {country.TotalConfirmed} <br/>
+                    Deaths: {country.TotalDeaths}
+                    </Card.Text>
+                    <hr/>
+                    </div>
+                 :
+                    ''
+             ))} 
+
+                {/* <div key="Brazil">
                 <Card.Title>
                 <Link to={`/country/Brazil`}>Brazil</Link>
                 </Card.Title>
@@ -72,7 +78,7 @@ export default class Main extends Component {
                 Deaths: 123
                 </Card.Text>
                 <hr/>
-                </div>
+                </div> */}
              
             </Card.Body>
            

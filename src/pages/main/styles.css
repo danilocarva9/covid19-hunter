@@ -11,3 +11,7 @@
     width: 100%;
     text-align: left;
 }
+.countries-list .bodyScroll {
+    overflow-y: scroll;
+    height: 350px;
+}
