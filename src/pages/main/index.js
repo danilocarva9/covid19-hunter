@@ -9,6 +9,7 @@ import './styles.css';
 export default class Main extends Component {
 
     state = {
+        global: {},
         countries: [],
         countryFilter: '',
     }
@@ -17,14 +18,13 @@ export default class Main extends Component {
     }
 
     loadCountries = async (filtered_value = null) => {
-
-        console.log(filtered_value);
         const response = await api.get('/summary');
-     
-
-        this.setState({ countries: response.data.Countries });
+        this.setState({ 
+            countries: response.data.Countries,
+            global: response.data.Global 
+        });
+       
     }
-
 
     handleChange = (e) => {
         
@@ -44,7 +44,10 @@ export default class Main extends Component {
     render(){
 
         const { countries } = this.state;
+        const { global } = this.state;
         
+        console.log(global);
+
         return (
         <HashRouter>
         <div>

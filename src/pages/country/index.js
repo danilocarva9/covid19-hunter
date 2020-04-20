@@ -10,27 +10,28 @@ export default class Country extends Component {
         loading: true
     }
 
-    async componentDidMount(){
-        this.componentDidUpdate();
+    componentDidMount(prevProps){
+        const { id } = this.props.match.params; 
+        if(prevProps !== this.props) {
+            this.fetchData(id);
+        }
     }
 
-    async componentDidUpdate(){
-
-        const { id } = this.props.match.params; //Country slug
-        const response = await api.get(`live/country/${id}`);
-
-        console.log(this.state.country_current.Country);
-        console.log(response.data[3].Country);
-
-        if(this.state.country_current.Country != response.data[3].Country) {
-            this.setState({ 
-                country_last3days: response.data,
-                country_current: response.data[3],
-                loading: false
-            });
+    componentDidUpdate(prevProps){
+        const { id } = this.props.match.params; 
+        if(prevProps !== this.props) {
+            this.fetchData(id);
         }
-     }
-     
+    }
+
+    async fetchData(id){
+         const response = await api.get(`live/country/${id}`);
+         this.setState({ 
+            country_last3days: response.data,
+            country_current: response.data[3],
+            loading: false
+         });
+    }
 
     render(){
 
